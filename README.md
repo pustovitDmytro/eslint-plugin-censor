@@ -1,17 +1,18 @@
-# npm-boilerplate
-**npm-boilerplate** boilerplate for creating npm packages.
+# eslint-plugin-censor
+**eslint-plugin-censor** The plugin will prevent you from using swear pejoratives and abuse words.
 
 [![Version][badge-vers]][npm]
 [![Dependencies][badge-deps]][npm]
 [![Vulnerabilities][badge-vuln]](https://snyk.io/)
 [![Build Status][badge-tests]][travis]
-[![Coverage Status][badge-coverage]](https://coveralls.io/github/pustovitDmytro/npm-boilerplate?branch=master)
+[![Coverage Status][badge-coverage]](coveralls)
 [![License][badge-lic]][github]
 
 ## Table of Contents
   - [Requirements](#requirements)
   - [Installation](#installation)
   - [Usage](#usage)
+  - [Sources](#sources)
   - [Contribute](#contribute)
 
 ## Requirements
@@ -25,7 +26,7 @@ To use library you need to have [node](https://nodejs.org) and [npm](https://www
 To install the library run following command
 
 ```bash
-  npm i --save npm-boilerplate
+  npm i --save eslint-plugin-censor
 ```
 
 ## Usage
@@ -33,6 +34,10 @@ To install the library run following command
 ```javascript
 
 ```
+
+## Sources
+
+* [wiktionary](https://en.wiktionary.org/wiki/Category:English_swear_words)
 
 ## Contribute
 
@@ -56,13 +61,13 @@ The Tag is one of the following:
 The message summary should be a one-sentence description of the change. The issue number should be mentioned at the end.
 
 
-[npm]: https://www.npmjs.com/package/npm-boilerplate
-[github]: https://github.com/pustovitDmytro/npm-boilerplate
-[travis]: https://travis-ci.org/pustovitDmytro/npm-boilerplate
-[coveralls]: https://coveralls.io/github/pustovitDmytro/npm-boilerplate?branch=master
-[badge-deps]: https://img.shields.io/david/pustovitDmytro/npm-boilerplate.svg
-[badge-tests]: https://img.shields.io/travis/pustovitDmytro/npm-boilerplate.svg
-[badge-vuln]: https://img.shields.io/snyk/vulnerabilities/npm/npm-boilerplate.svg?style=popout
-[badge-vers]: https://img.shields.io/npm/v/npm-boilerplate.svg
-[badge-lic]: https://img.shields.io/github/license/pustovitDmytro/npm-boilerplate.svg
-[badge-coverage]: https://coveralls.io/repos/github/pustovitDmytro/npm-boilerplate/badge.svg?branch=master
+[npm]: https://www.npmjs.com/package/eslint-plugin-censor
+[github]: https://github.com/pustovitDmytro/eslint-plugin-censor
+[travis]: https://travis-ci.com/pustovitDmytro/eslint-plugin-censor
+[coveralls]: https://coveralls.io/github/pustovitDmytro/eslint-plugin-censor?branch=master
+[badge-deps]: https://img.shields.io/david/pustovitDmytro/eslint-plugin-censor.svg
+[badge-tests]: https://img.shields.io/travis/pustovitDmytro/eslint-plugin-censor.svg
+[badge-vuln]: https://img.shields.io/snyk/vulnerabilities/npm/eslint-plugin-censor.svg?style=popout
+[badge-vers]: https://img.shields.io/npm/v/eslint-plugin-censor.svg
+[badge-lic]: https://img.shields.io/github/license/pustovitDmytro/eslint-plugin-censor.svg
+[badge-coverage]: https://coveralls.io/repos/github/pustovitDmytro/eslint-plugin-censor/badge.svg?branch=master
