@@ -1,4 +1,4 @@
-module.exports = process.env.BUILD !== '0'
+module.exports = +process.env.BUILD
     ? require('../lib')
     : require('../src');
 
