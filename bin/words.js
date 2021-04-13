@@ -2,14 +2,24 @@
 import path from 'path';
 import yargs from 'yargs/yargs';
 import fs from 'fs-extra';
+import { isArray } from 'myrmidon';
+import { Stemmer, Languages } from 'multilingual-stemmer';
 import { onYargsFail, cliCommand } from './utils';
 
+// Create a stemmer for the english language
+const stemmer = new Stemmer(Languages.English);
+
 const isMain = !module.parent;
-const COMMON_JSON_PATH = path.join(__dirname, '../src/words.json');
+const BLACKLIST_JSON_PATH = path.join(__dirname, '../src/words/blackList.json');
+const WHITELIST_JSON_PATH = path.join(__dirname, '../src/words/whiteList.json');
+
+function stem(word) {
+    return stemmer.stem(word);
+}
 
 async function loadJSON(filePath) {
     if (!await fs.exists(filePath)) {
-        console.warn(`no current words file found in ${COMMON_JSON_PATH}`);
+        console.warn(`no words file found in ${filePath}`);
 
         return [];
     }
@@ -17,27 +27,71 @@ async function loadJSON(filePath) {
     return require(filePath);
 }
 
+const sumLength = (prev, curr) => prev + curr.length;
+
 function merge(current, income) {
     console.log(`Current words: ${current.length}\nIncome words: ${income.length}`);
-    const words = [ ...current, ...income ];
-    const normalized = words.map(w => {
-        const caseInsensitive = w.toLowerCase();
-        const toOneWord = caseInsensitive.replace(/\W/g, '');
+    const normalized = [ ...current, income.map(w => {
+        const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
+        const stemmed = array.map(item => stem(item));
 
-        return toOneWord;
+        return stemmed.filter(i => i.length > 2);
+    }) ];
+
+    normalized.sort((a, b) => {
+        const byArrLength = a.length - b.length;
+
+        if (byArrLength) return byArrLength;
+        const byWordLength = a.reduce(sumLength, 0) - b.reduce(sumLength, 0);
+
+        if (byWordLength) return byWordLength;
+
+        return a[0] > b[0] ? 1 : -1;
     });
 
-    normalized.sort((a, b) => a.length - b.length);
+    const filterDublicates = normalized
+        .filter(w => w.length)
+        .filter((word, index, all) => {
+            const firstOccurence = all.findIndex(item =>
+                item.every(i => word.some(w => w.includes(i)))
+            );
 
-    const filterDublicates = normalized.filter((word, index) => {
-        const firstOccurence = normalized.findIndex(item => word.includes(item));
-
-        return firstOccurence === index;
-    });
+            return firstOccurence === index;
+        });
 
     console.log(`Filtered ${normalized.length - filterDublicates.length} dublicates`);
 
-    return filterDublicates.sort();
+    return filterDublicates.map(items => items.length === 1 ? items[0] : items);
+}
+
+
+function mergeWhite(current, income, black) {
+    console.log(`Current words: ${current.length}\nIncome words: ${income.length}`);
+    const normalized = [ ...current, income.map(w => {
+        const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
+        const stemmed = array.map(item => stem(item));
+
+        return stemmed.filter(i => i.length > 2);
+    }) ];
+
+    const filtered = normalized
+        .filter(w => w.length)
+        .filter(word => {
+            const isTreatBad = black.find(ws => isArray(ws)
+                ? ws.every(w => word.some(ww => ww.includes(w)))
+                : word.some(ww => ww.includes(ws))
+            );
+
+            if (isTreatBad) {
+                console.log(word, isTreatBad);
+            }
+
+            return !!isTreatBad;
+        });
+
+    console.log(`Filtered ${normalized.length - filtered.length} dublicates, Left: ${filtered.length} words`);
+
+    return filtered.map(items => items.length === 1 ? items[0] : items);
 }
 
 async function save(args) {
@@ -50,12 +104,32 @@ async function save(args) {
     }
 
     if (!words.length) console.warn('No new words specified');
-    const current = await loadJSON(COMMON_JSON_PATH);
+    const current = await loadJSON(BLACKLIST_JSON_PATH);
     const merged = merge(current, words);
 
     if (args.confirm) {
-        await fs.writeJSON(COMMON_JSON_PATH, merged);
-        console.log(`New words written to ${COMMON_JSON_PATH}`);
+        await fs.writeJSON(BLACKLIST_JSON_PATH, merged);
+        console.log(`New words written to ${BLACKLIST_JSON_PATH}`);
+    }
+}
+
+async function saveWhite(args) {
+    const words = args.words || [];
+
+    if (args.file) {
+        const content = await fs.readFile(args.file);
+
+        words.push(...content.toString().split(/\n|\r\n/));
+    }
+
+    if (!words.length) console.warn('No new words specified');
+    const current = await loadJSON(WHITELIST_JSON_PATH);
+    const black = await loadJSON(BLACKLIST_JSON_PATH);
+    const merged = mergeWhite(current, words, black);
+
+    if (args.confirm) {
+        await fs.writeJSON(WHITELIST_JSON_PATH, merged);
+        console.log(`New words written to ${WHITELIST_JSON_PATH}`);
     }
 }
 
@@ -64,39 +138,86 @@ export default async function run(cmd) {
         const Argv = yargs(cmd)
             .usage('Usage: $0 <command> [options]')
             .command({
-                command : 'list [--confirm] <words...>',
-                builder : y => y
-                    .option('words', {
-                        describe     : 'words to add',
-                        demandOption : true,
-                        type         : 'array'
+                command : 'black',
+                builder : yar => yar
+                    .usage('Usage: $0 black <command> [options]')
+                    .command({
+                        command : 'list [--confirm] <words...>',
+                        builder : y => y
+                            .option('words', {
+                                describe     : 'words to add',
+                                demandOption : true,
+                                type         : 'array'
+                            })
+                            .option('confirm', {
+                                describe     : 'save to file, if not set only analize',
+                                alias        : [ 'y' ],
+                                demandOption : false,
+                                type         : 'boolean'
+                            }),
+                        desc    : 'Save new words to common black list from cli',
+                        handler : cliCommand(save)
                     })
-                    .option('confirm', {
-                        describe     : 'save to file, if not set only analize',
-                        alias        : [ 'y' ],
-                        demandOption : false,
-                        type         : 'boolean'
+                    .command({
+                        command : 'file <file> [--confirm]',
+                        builder : y => y
+                            .option('file', {
+                                alias        : [ 'f' ],
+                                demandOption : true,
+                                describe     : 'path to file, where words are stored',
+                                type         : 'string'
+                            })
+                            .option('confirm', {
+                                describe     : 'save to file, if not set only analize',
+                                alias        : [ 'y' ],
+                                demandOption : false,
+                                type         : 'boolean'
+                            }),
+                        desc    : 'Save new words to common black list from file',
+                        handler : cliCommand(save)
                     }),
-                desc    : 'Save new words to common json list',
-                handler : cliCommand(save)
+                desc : 'Save new words to black list'
             })
             .command({
-                command : 'file <file> [--confirm]',
-                builder : y => y
-                    .option('file', {
-                        alias        : [ 'f' ],
-                        demandOption : true,
-                        describe     : 'path to file, where words need to be added',
-                        type         : 'string'
+                command : 'white',
+                builder : yar => yar
+                    .usage('Usage: $0 white <command> [options]')
+                    .command({
+                        command : 'list [--confirm] <words...>',
+                        builder : y => y
+                            .option('words', {
+                                describe     : 'words to add',
+                                demandOption : true,
+                                type         : 'array'
+                            })
+                            .option('confirm', {
+                                describe     : 'save to file, if not set only analize',
+                                alias        : [ 'y' ],
+                                demandOption : false,
+                                type         : 'boolean'
+                            }),
+                        desc    : 'Save new words to common white list from cli',
+                        handler : cliCommand(saveWhite)
                     })
-                    .option('confirm', {
-                        describe     : 'save to file, if not set only analize',
-                        alias        : [ 'y' ],
-                        demandOption : false,
-                        type         : 'boolean'
+                    .command({
+                        command : 'file <file> [--confirm]',
+                        builder : y => y
+                            .option('file', {
+                                alias        : [ 'f' ],
+                                demandOption : true,
+                                describe     : 'path to file, where words are stored',
+                                type         : 'string'
+                            })
+                            .option('confirm', {
+                                describe     : 'save to file, if not set only analize',
+                                alias        : [ 'y' ],
+                                demandOption : false,
+                                type         : 'boolean'
+                            }),
+                        desc    : 'Save new words to common white list from file',
+                        handler : cliCommand(saveWhite)
                     }),
-                desc    : 'Save new words to common json list',
-                handler : cliCommand(save)
+                desc : 'Save new words to white list'
             })
             .help('h')
             .alias('h', 'help')
