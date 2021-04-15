@@ -1,14 +1,39 @@
-import words from '../words.json';
+import blackList from '../words/blackList.json';
+import whiteList from '../words/whiteList.json';
+
+function findInList(list, word) {
+    return list.find(w =>
+        Array.isArray(w)
+            ? w.every(ww => word.includes(ww))
+            : word.includes(w)
+    );
+}
+
+function checkSwear(node, word, context) {
+    const sanitized = `${word}`.toLowerCase();
+    const isBad = findInList(blackList, sanitized);
+
+    if (isBad) {
+        const justified = findInList(whiteList, sanitized);
+
+        if (!justified) {
+            const match = Array.isArray(isBad) ? isBad.join('_') : isBad;
+
+            context.report({
+                node,
+                message : `${node.type} ${word} is considered as swear word [${match}]`
+            });
+        }
+    }
+}
 
 export function create(context) {
     return {
         Identifier(node) {
-            if (words.includes(node.name)) {
-                context.report({
-                    node,
-                    message : 'Swear found'
-                });
-            }
+            checkSwear(node, node.name, context);
+        },
+        Literal(node) {
+            checkSwear(node, node.value, context);
         }
     };
 }
