@@ -1,3 +1,22 @@
+# [1.1.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.0.0...v1.1.0) (2021-04-15)
+
+
+### Chore
+
+* adds tests for packing process ([9b9602d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/9b9602d2d5e9d869a6555437355325c703ccfb5b))
+* corrected extglob matching ([72a2201](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/72a22018f8e9875de4194821361602cc432a32b1))
+* corrected pack pattern ([273497a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/273497a050e075200512db9033ee2fe9d973a5f4))
+* fixes package process ([364e26b](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/364e26b379e6cd94b89776aa0a41abd10a5dc43a))
+
+### New
+
+* adds new wordlists ([5334b21](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/5334b214333cfa27652692926d979215e1850e2d))
+* adds white list logic ([cc03c7a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/cc03c7a04ca46b2dd7ee9090a516daa0c81dddf8))
+
+### Upgrade
+
+* fixes np audit ([cbe3ee4](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/cbe3ee41d617d974fc3991642a6b3e1527bc67f2))
+
 # 1.0.0 (2021-04-10)
 
 
