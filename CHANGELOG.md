@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.0...v1.1.1) (2021-04-16)
+
+
+### Chore
+
+* change tgz label ([5e0e512](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/5e0e51223c0069915e559de8a55a18696254f8fd))
+* use native tarball generation ([eeefda5](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/eeefda5daa30eedd1af621c4a0c0efa32f0c9645))
+
+### Fix
+
+* move multilingual-stemmer to devdependencies ([4dd5b10](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4dd5b102db21c3cdd558e69a874067b704cf83e7))
+
 # [1.1.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.0.0...v1.1.0) (2021-04-15)
 
 
