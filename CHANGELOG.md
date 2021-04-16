@@ -1,3 +1,14 @@
+## [1.1.2](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.1...v1.1.2) (2021-04-16)
+
+
+### Docs
+
+* adds usage documentation ([a9979ff](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a9979ffcca8fcdb7accbf8d54a40b9fc688c2d6f))
+
+### Fix
+
+* fixes typo ([4f8ced4](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4f8ced4f6a9ba7559b68c94d0bcfcf30faa57e45))
+
 ## [1.1.1](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.0...v1.1.1) (2021-04-16)
 
 
