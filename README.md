@@ -26,18 +26,44 @@ To use library you need to have [node](https://nodejs.org) and [npm](https://www
 To install the library run following command
 
 ```bash
-  npm i --save eslint-plugin-censor
+  npm i --save-dev eslint-plugin-censor
 ```
 
 ## Usage
 
-```javascript
+After installation add plugin to eslint config:
 
+```json
+{
+    "extends": [...],
+    "env": {...},
+    "plugins": [ "censor" ],
+    "rules": {...}
+}
 ```
+
+And enable rule:
+```json
+{
+    "extends": [...],
+    "env": {...},
+    "plugins": [ "censor" ],
+    "rules": {
+      ...
+      "censor/no-swear": 2
+    }
+}
+```
+
+then you can check your courtesy by running eslint.
+
 
 ## Sources
 
 * [wiktionary](https://en.wiktionary.org/wiki/Category:English_swear_words)
+* https://github.com/MauriceButler/badwords
+* https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
+* https://github.com/first20hours/google-10000-english
 
 ## Contribute
 
