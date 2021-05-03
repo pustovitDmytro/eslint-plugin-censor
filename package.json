@@ -74,7 +74,7 @@
     "eslint-plugin-no-require-lodash": "^1.1.0",
     "eslint-plugin-prefer-spread": "^1.0.3",
     "eslint-plugin-react": "^7.12.4",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^10.0.0",
     "husky": "^6.0.0",
     "multilingual-stemmer": "^1.0.2",
     "myrmidon": "^1.4.4",
