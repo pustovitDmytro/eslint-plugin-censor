@@ -4,7 +4,7 @@
   "description": "The plugin will prevent you from using swear pejoratives and abuse words ",
   "main": "./lib",
   "scripts": {
-    "prepare": "babel src --out-dir ./lib && husky install",
+    "prepare": "babel src --out-dir ./lib --copy-files && husky install",
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "test:security": "npm audit && npm run test:lock",
     "test:lint": "eslint src bin tests",
