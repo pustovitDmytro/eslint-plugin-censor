@@ -1,4 +1,4 @@
-import RuleTester from 'eslint/lib/testers/rule-tester';
+import { RuleTester } from 'eslint';
 import plugin from '../entry';
 
 const rule = plugin.rules['no-swear'];
