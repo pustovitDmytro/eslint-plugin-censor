@@ -1,3 +1,72 @@
+# [1.2.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.2...v1.2.0) (2021-05-03)
+
+
+### Chore
+
+* (refactor) remove unused argument ([6f28b59](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/6f28b59cefcbae9e6ba3b25eea2a65980daa1d84))
+* adds CIRCLE_SKIP_DEPLOY variable ([231549d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/231549dda35992edbe9732a2848ce6485994214c))
+* adds danger to circle-ci ([ae48ac3](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ae48ac3120c89603fd452b79bc9245e65fdf56c9))
+* adds danger to validate pr ([7fb7040](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7fb7040e3b4daa8fc1b419aa88e08118fb43497d))
+* adds danger token to circle ([82f4156](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/82f4156f972af35775e72f9fca4c0ff374e5364b))
+* adds dangerfile to npm ignore ([8842c70](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/8842c70cad5ba463b996988d8928c58dbea1fa2f))
+* adds dummy line to calc coverage ([800de67](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/800de67b17a2a5899c2a43d9d16ea0f3774ed642))
+* adds empty line to pr comment ([36d8a09](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/36d8a0977895e3236213a5c1091fd4c0af3107b4))
+* adds jscpd to ignore ([8520cea](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/8520ceadd2d75a90e44f94c6351ebdafc4ef9944))
+* adds lock file lint ([f5a4679](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/f5a467979d6cbb3fa21797fe063deb99c2e6e6d0))
+* adds technical dept check ([e16a8e2](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/e16a8e2880d894ed0ca6f6125b7be61a90a15768))
+* adds test-results to circle-ci ([767c5b3](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/767c5b348a5fe8747604355cf7342fa65b6e3fe3))
+* adds tests for prior node versions ([4b00012](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4b000127879722533f57155ba97adba6a0c04e8d))
+* copy json on build ([321940a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/321940ab138e51327cc7b06dbe69f7b60fa7f452))
+* deploy ci as single command ([96c2800](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/96c280048128a9879c48d11d3b49b1f3ef60ca77))
+* deploy in circle-ci ([a62a5f2](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a62a5f27f010c0fb083ea73c61979a42996453ac))
+* dont pin devDeps in renovate ([5fb0e8d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/5fb0e8d473117724b74286f57ee1d0281dcb82cb))
+* exit code 0 when skip ([f6ee0bf](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/f6ee0bf8f6965f884165f1ebcf83c9ca9a19bb28))
+* fill test entry with template ([9177859](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/91778596117f64bde00feeda72b0f7b5dbf7b592))
+* fixes Breaking increment in semantic-release ([d1c4d53](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/d1c4d5314eb9921111d4e033ae59e1495e842fa3))
+* Fixes danger-pr in circe-ci ([adff8b3](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/adff8b366b2dc50b880f3d5dedaa05bc8cd9152d))
+* fixes debt typo in travis job ([f9fd463](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/f9fd4631aa300e16128a4d7107d45f9317f70c9b))
+* fixes renovate config ([05c5bc5](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/05c5bc5a6d90da713d245663319d34cf6519df1f))
+* ignoring all for npm packaging ([409201a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/409201abede4ee9458a430a491c7471a525e976a))
+* inverse logical condition ([65dd0ad](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/65dd0ad91e442702ae98993f21163d26270cd4ec))
+* multi os tests for travis ([7c8ce28](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7c8ce28437898910ea7fbf8151a3de346431c482))
+* run pr workflow only for pull requests ([03e0b08](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/03e0b0880da9166c7a19fbf6ba171be65af6cbb5))
+* split circle ci jobs ([9f75a6b](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/9f75a6b8c1f9002302b367c7a58f5d85f007cc5d))
+* telegram notifications on release ([3a8036a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/3a8036a66d1ad82b978bbb356e0ac0cd1b1d1e46))
+* update .renovaterc to automerge after successfull checks ([2e76ceb](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/2e76ceb3dfe909955ef9e4a964312d794d41c4a8))
+* Update dependency babel-plugin-module-resolver to v4 ([b8eb86f](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/b8eb86f0d94bf8e81e2c9a37d64698aa9ccfebc5))
+* Update dependency eslint to v7 ([0e79e0f](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/0e79e0fa4b2ccb410fd5e6c4648d9280276aeba0))
+* Update dependency mocha to v8 ([627a45b](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/627a45bd29e1b5fb1398f539633b54e76175563a))
+* Update dependency nyc to v15 ([1caf199](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1caf199155baa1da46474ec231533a78865d6c19))
+* Update dependency uuid to v8 ([ebae34b](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ebae34b9fc2a074d05600b0e6af2cf3279630508))
+* update semantic to use commit convention ([7e079b2](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7e079b2eaeb424f55b591b124b7f998a092c0988))
+* Update semantic-release monorepo ([b7ab2b1](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/b7ab2b1ad472bc6b20d34cdf527704b3c62ea57b))
+* update travis badge ([e159104](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/e1591042eba97c4b87c923a3a84053eca1e2da4d))
+* updates semanticCommitType rule ([1a1d119](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1a1d119cd2c11b843e8d3a7e99eed85695b46df4))
+* upgrade circle-ci to 2.1 ([fab79a9](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/fab79a93b2ba07dd088d9d89024b24d5a21f2ac3))
+* use danger for internall pr ([d838ede](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/d838edef9a425510615b3405d49b8056176f23d8))
+* using static test entry ([21e5b7d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/21e5b7dbe05b69221d71f5e9cde845028f942209))
+
+### Docs
+
+* adds codefactor badge ([52a2a14](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/52a2a141162707299ffe9106c748c113b1ddd0ab))
+* adds Fossa badge ([60a6703](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/60a67033da46b587902189d267d2da6ba011b41b))
+* change travis badge to circle-ci ([ebabb61](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ebabb61f19ac4413561d3ffd849f9392f1c60bb5))
+* changes size-url ([ecc2fc2](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ecc2fc29fa0ad2b353146d18fcf33747f5393230))
+* fixes spellcheck ([bc06d85](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/bc06d85a523a2977307c588ee6abe6152c66ef19))
+* prettify modified_files as markdown list in pr ([6397f60](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/6397f60597573cab04278c8b597b13cdb452773a))
+* prettify modified_files list in pr ([ecce71a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ecce71a2494382206f983c8370cdd9affbc341a7))
+* removes ) from badge ([b986009](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/b9860094fc98fdc00a049d81652d2c9f484ae73d))
+* reorder badges ([ed6d250](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ed6d250fb5cc10c4599f2c50425bf50931d9d560))
+* update badges ([ffe57a1](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ffe57a1289e40b9a10d7354276368253f90fc238))
+* update year in license ([1aa3c35](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1aa3c358528d22e9a8657fa78c41f4cbc9b7bb17))
+
+### New
+
+* adds circle-ci ([4f55862](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4f558626db2d5d6c4aaa366c73a4c2a0cc05feb1))
+* adds context to circle-ci ([a3a1f33](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a3a1f33a03d1c32b2d467cdce1d7ab3fb0b8ce8b))
+* adds recommended config ([1759243](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1759243964f01f862f27efd85a582bc823676eb0))
+* adds renovate ([1e32c02](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1e32c027a0c237f0af49a02317687d71fb3a8e76))
+
 ## [1.1.2](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.1...v1.1.2) (2021-04-16)
 
 
