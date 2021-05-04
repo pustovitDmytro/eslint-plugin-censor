@@ -1,3 +1,4 @@
+const YARGS_FAIL_CODE = 2;
 
 export function onYargsFail(rej, message, error, ygs) {
     const failMessage = message || error;
@@ -7,11 +8,13 @@ export function onYargsFail(rej, message, error, ygs) {
         console.error(failMessage.toString());
         console.error(error?.stack);
     }
+
     if (rej) return rej(failMessage);
-    process.exit(2);
+    process.exit(YARGS_FAIL_CODE);
 }
 
 export function cliCommand(method, isMain) {
+    // eslint-disable-next-line func-style
     const f =  async function (...args) {
         try {
             const result = await Promise.resolve(method.apply(this, args));

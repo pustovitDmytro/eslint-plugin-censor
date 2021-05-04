@@ -12,6 +12,8 @@ const stemmer = new Stemmer(Languages.English);
 const isMain = !module.parent;
 const BLACKLIST_JSON_PATH = path.join(__dirname, '../src/words/blackList.json');
 const WHITELIST_JSON_PATH = path.join(__dirname, '../src/words/whiteList.json');
+const MIN_TERMINAL_WIDTH = 95;
+const STEM_MIN_LENGTH = 2;
 
 function stem(word) {
     return stemmer.stem(word);
@@ -24,7 +26,7 @@ async function loadJSON(filePath) {
         return [];
     }
 
-    return require(filePath);
+    return fs.readJSON(filePath);
 }
 
 const sumLength = (prev, curr) => prev + curr.length;
@@ -35,7 +37,7 @@ function merge(current, income) {
         const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
         const stemmed = array.map(item => stem(item));
 
-        return stemmed.filter(i => i.length > 2);
+        return stemmed.filter(i => i.length > STEM_MIN_LENGTH);
     }) ];
 
     normalized.sort((a, b) => {
@@ -53,8 +55,7 @@ function merge(current, income) {
         .filter(w => w.length)
         .filter((word, index, all) => {
             const firstOccurence = all.findIndex(item =>
-                item.every(i => word.some(w => w.includes(i)))
-            );
+                item.every(i => word.some(w => w.includes(i))));
 
             return firstOccurence === index;
         });
@@ -71,7 +72,7 @@ function mergeWhite(current, income, black) {
         const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
         const stemmed = array.map(item => stem(item));
 
-        return stemmed.filter(i => i.length > 2);
+        return stemmed.filter(i => i.length > STEM_MIN_LENGTH);
     }) ];
 
     const filtered = normalized
@@ -79,8 +80,7 @@ function mergeWhite(current, income, black) {
         .filter(word => {
             const isTreatBad = black.find(ws => isArray(ws)
                 ? ws.every(w => word.some(ww => ww.includes(w)))
-                : word.some(ww => ww.includes(ws))
-            );
+                : word.some(ww => ww.includes(ws)));
 
             if (isTreatBad) {
                 console.log(word, isTreatBad);
@@ -221,7 +221,7 @@ export default async function run(cmd) {
             })
             .help('h')
             .alias('h', 'help')
-            .wrap(Math.min(95, process.stdout.columns))
+            .wrap(Math.min(MIN_TERMINAL_WIDTH, process.stdout.columns))
             .demandCommand(1, '').recommendCommands().strict()
             .onFinishCommand(res)
             .fail(onYargsFail.bind(null, !isMain && rej));
@@ -230,4 +230,6 @@ export default async function run(cmd) {
     });
 }
 
-if (isMain) run(process.argv.slice(2));
+const commandArgsIndex = 2;
+
+if (isMain) run(process.argv.slice(commandArgsIndex));

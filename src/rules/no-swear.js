@@ -5,8 +5,7 @@ function findInList(list, word) {
     return list.find(w =>
         Array.isArray(w)
             ? w.every(ww => word.includes(ww))
-            : word.includes(w)
-    );
+            : word.includes(w));
 }
 
 function checkSwear(node, word, context) {
