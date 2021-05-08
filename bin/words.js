@@ -4,7 +4,7 @@ import yargs from 'yargs/yargs';
 import fs from 'fs-extra';
 import { isArray, toArray } from 'myrmidon';
 import { Stemmer, Languages } from 'multilingual-stemmer';
-import { onYargsFail, cliCommand } from './utils';
+import { cliCommand } from './utils';
 
 // Create a stemmer for the english language
 const stemmer = new Stemmer(Languages.English);
@@ -68,11 +68,23 @@ function merge(current, income) {
 
 function mergeWhite(current, income, black) {
     console.log(`Current words: ${current.length}\nIncome words: ${income.length}`);
+    function hasBadPart(word) {
+        const isTreatBad = black.find(ws => isArray(ws)
+            ? ws.every(w => word.some(ww => ww.includes(w)))
+            : word.some(ww => ww.includes(ws)));
+
+        if (!isTreatBad) {
+            console.log(word, isTreatBad);
+        }
+
+        return !!isTreatBad;
+    }
+
     const normalized = [
         ...current.map(toArray),
         ...income.map(w => {
             const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
-            const stemmed = array.map(item => stem(item));
+            const stemmed = array.map(item => item);
 
             return stemmed.filter(i => i.length > STEM_MIN_LENGTH);
         })
@@ -80,17 +92,7 @@ function mergeWhite(current, income, black) {
 
     const filtered = normalized
         .filter(w => w.length)
-        .filter(word => {
-            const isTreatBad = black.find(ws => isArray(ws)
-                ? ws.every(w => word.some(ww => ww.includes(w)))
-                : word.some(ww => ww.includes(ws)));
-
-            if (isTreatBad) {
-                console.log(word, isTreatBad);
-            }
-
-            return !!isTreatBad;
-        });
+        .filter(hasBadPart);
 
     console.log(`Filtered ${normalized.length - filtered.length} not matching bad, Left: ${filtered.length} words`);
 
@@ -148,100 +150,96 @@ async function saveWhite(args) {
 }
 
 export default async function run(cmd) {
-    await new Promise((res, rej) => {
-        const Argv = yargs(cmd)
-            .usage('Usage: $0 <command> [options]')
-            .command({
-                command : 'black',
-                builder : yar => yar
-                    .usage('Usage: $0 black <command> [options]')
-                    .command({
-                        command : 'list [--confirm] <words...>',
-                        builder : y => y
-                            .option('words', {
-                                describe     : 'words to add',
-                                demandOption : true,
-                                type         : 'array'
-                            })
-                            .option('confirm', {
-                                describe     : 'save to file, if not set only analize',
-                                alias        : [ 'y' ],
-                                demandOption : false,
-                                type         : 'boolean'
-                            }),
-                        desc    : 'Save new words to common black list from cli',
-                        handler : cliCommand(save)
-                    })
-                    .command({
-                        command : 'file <file> [--confirm]',
-                        builder : y => y
-                            .option('file', {
-                                alias        : [ 'f' ],
-                                demandOption : true,
-                                describe     : 'path to file, where words are stored',
-                                type         : 'string'
-                            })
-                            .option('confirm', {
-                                describe     : 'save to file, if not set only analize',
-                                alias        : [ 'y' ],
-                                demandOption : false,
-                                type         : 'boolean'
-                            }),
-                        desc    : 'Save new words to common black list from file',
-                        handler : cliCommand(save)
-                    }),
-                desc : 'Save new words to black list'
-            })
-            .command({
-                command : 'white',
-                builder : yar => yar
-                    .usage('Usage: $0 white <command> [options]')
-                    .command({
-                        command : 'list [--confirm] <words...>',
-                        builder : y => y
-                            .option('words', {
-                                describe     : 'words to add',
-                                demandOption : true,
-                                type         : 'array'
-                            })
-                            .option('confirm', {
-                                describe     : 'save to file, if not set only analize',
-                                alias        : [ 'y' ],
-                                demandOption : false,
-                                type         : 'boolean'
-                            }),
-                        desc    : 'Save new words to common white list from cli',
-                        handler : cliCommand(saveWhite)
-                    })
-                    .command({
-                        command : 'file <file> [--confirm]',
-                        builder : y => y
-                            .option('file', {
-                                alias        : [ 'f' ],
-                                demandOption : true,
-                                describe     : 'path to file, where words are stored',
-                                type         : 'string'
-                            })
-                            .option('confirm', {
-                                describe     : 'save to file, if not set only analize',
-                                alias        : [ 'y' ],
-                                demandOption : false,
-                                type         : 'boolean'
-                            }),
-                        desc    : 'Save new words to common white list from file',
-                        handler : cliCommand(saveWhite)
-                    }),
-                desc : 'Save new words to white list'
-            })
-            .help('h')
-            .alias('h', 'help')
-            .wrap(Math.min(MIN_TERMINAL_WIDTH, process.stdout.columns))
-            .demandCommand(1, '').recommendCommands().strict()
-            .onFinishCommand(res)
-            .fail(onYargsFail.bind(null, !isMain && rej));
+    const Argv = yargs(cmd)
+        .usage('Usage: $0 <command> [options]')
+        .command({
+            command : 'black',
+            builder : yar => yar
+                .usage('Usage: $0 black <command> [options]')
+                .command({
+                    command : 'list [--confirm] <words...>',
+                    builder : y => y
+                        .option('words', {
+                            describe     : 'words to add',
+                            demandOption : true,
+                            type         : 'array'
+                        })
+                        .option('confirm', {
+                            describe     : 'save to file, if not set only analize',
+                            alias        : [ 'y' ],
+                            demandOption : false,
+                            type         : 'boolean'
+                        }),
+                    desc    : 'Save new words to common black list from cli',
+                    handler : cliCommand(save)
+                })
+                .command({
+                    command : 'file <file> [--confirm]',
+                    builder : y => y
+                        .option('file', {
+                            alias        : [ 'f' ],
+                            demandOption : true,
+                            describe     : 'path to file, where words are stored',
+                            type         : 'string'
+                        })
+                        .option('confirm', {
+                            describe     : 'save to file, if not set only analize',
+                            alias        : [ 'y' ],
+                            demandOption : false,
+                            type         : 'boolean'
+                        }),
+                    desc    : 'Save new words to common black list from file',
+                    handler : cliCommand(save)
+                }),
+            desc : 'Save new words to black list'
+        })
+        .command({
+            command : 'white',
+            builder : yar => yar
+                .usage('Usage: $0 white <command> [options]')
+                .command({
+                    command : 'list [--confirm] <words...>',
+                    builder : y => y
+                        .option('words', {
+                            describe     : 'words to add',
+                            demandOption : true,
+                            type         : 'array'
+                        })
+                        .option('confirm', {
+                            describe     : 'save to file, if not set only analize',
+                            alias        : [ 'y' ],
+                            demandOption : false,
+                            type         : 'boolean'
+                        }),
+                    desc    : 'Save new words to common white list from cli',
+                    handler : cliCommand(saveWhite)
+                })
+                .command({
+                    command : 'file <file> [--confirm]',
+                    builder : y => y
+                        .option('file', {
+                            alias        : [ 'f' ],
+                            demandOption : true,
+                            describe     : 'path to file, where words are stored',
+                            type         : 'string'
+                        })
+                        .option('confirm', {
+                            describe     : 'save to file, if not set only analize',
+                            alias        : [ 'y' ],
+                            demandOption : false,
+                            type         : 'boolean'
+                        }),
+                    desc    : 'Save new words to common white list from file',
+                    handler : cliCommand(saveWhite)
+                }),
+            desc : 'Save new words to white list'
+        })
+        .help('h')
+        .alias('h', 'help')
+        .wrap(Math.min(MIN_TERMINAL_WIDTH, process.stdout.columns))
+        .demandCommand(1, '').recommendCommands().strict();
 
-        return Argv.argv;
-    });
+    await Argv.argv;
 }
 
 const commandArgsIndex = 2;
