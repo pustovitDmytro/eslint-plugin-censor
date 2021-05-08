@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.3.1...v1.4.0) (2021-05-08)
+
+
+### New
+
+* adds accum to whitelist ([7e5038c](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7e5038c950f5463610ae31a246452f2b9be947cc))
+
 ## [1.3.1](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.3.0...v1.3.1) (2021-05-08)
 
 
