@@ -2,7 +2,7 @@
 import path from 'path';
 import yargs from 'yargs/yargs';
 import fs from 'fs-extra';
-import { isArray } from 'myrmidon';
+import { isArray, toArray } from 'myrmidon';
 import { Stemmer, Languages } from 'multilingual-stemmer';
 import { onYargsFail, cliCommand } from './utils';
 
@@ -68,12 +68,15 @@ function merge(current, income) {
 
 function mergeWhite(current, income, black) {
     console.log(`Current words: ${current.length}\nIncome words: ${income.length}`);
-    const normalized = [ ...current, income.map(w => {
-        const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
-        const stemmed = array.map(item => stem(item));
+    const normalized = [
+        ...current.map(toArray),
+        ...income.map(w => {
+            const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
+            const stemmed = array.map(item => stem(item));
 
-        return stemmed.filter(i => i.length > STEM_MIN_LENGTH);
-    }) ];
+            return stemmed.filter(i => i.length > STEM_MIN_LENGTH);
+        })
+    ];
 
     const filtered = normalized
         .filter(w => w.length)
@@ -89,9 +92,20 @@ function mergeWhite(current, income, black) {
             return !!isTreatBad;
         });
 
-    console.log(`Filtered ${normalized.length - filtered.length} dublicates, Left: ${filtered.length} words`);
+    console.log(`Filtered ${normalized.length - filtered.length} not matching bad, Left: ${filtered.length} words`);
 
-    return filtered.map(items => items.length === 1 ? items[0] : items);
+    const filterDublicates = filtered
+        .filter(w => w.length)
+        .filter((word, index, all) => {
+            const firstOccurence = all.findIndex(item =>
+                item.every(i => word.some(w => w === i)));
+
+            return firstOccurence === index;
+        });
+
+    console.log(`Filtered ${filtered.length - filterDublicates.length} dublicates, Left: ${filterDublicates.length} words`);
+
+    return filterDublicates.map(items => items.length === 1 ? items[0] : items);
 }
 
 async function save(args) {
