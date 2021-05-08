@@ -1,3 +1,23 @@
+# [1.3.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.2.0...v1.3.0) (2021-05-08)
+
+
+### Chore
+
+* adds pr context ([ce163d9](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/ce163d98af7e779af2242418b9d4fe18deeffb36))
+* adds trusted bots to danger ([892f4a1](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/892f4a12a0084464da137d25b1a027e4afb808bd))
+* fixes ci ([0576a01](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/0576a013f537d21591b13214c3cf2c1cf33bfa79))
+* Update dependency @rollup/plugin-node-resolve to v13 ([88ba640](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/88ba640b608f17160a44f1ab7c43e557dcb2d0b8))
+* Update dependency fs-extra to v10 ([7a215f8](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7a215f863d7b13a2502abde3aeb1fb24346b16a0))
+* Update dependency fs-extra to v10 ([a0adecc](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a0adecc6b0b58e877bb64aff29e9a42bdc8a9d71))
+* Update dependency yargs to v17 ([29040f1](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/29040f1f21285200650b1f9f85b0331d085a492f))
+* Update issue templates ([8fdb1af](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/8fdb1af8db2dbb2cd8912bef867d62b95781fc56))
+* Update pr template ([1d4eb34](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/1d4eb34da6085757d1707db0c440c6e245c3e2e3))
+* use incredible eslint config ([b03d74a](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/b03d74a4e8e9ee1dcecba72d2137d70dafbf8b73))
+
+### New
+
+* adds 'assert parse apiKey charset spacing CLITest atlassian' words to ignore list ([89cdee5](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/89cdee57fe10aadaeebb0a3980c173dde8a6073a))
+
 # [1.2.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.1.2...v1.2.0) (2021-05-03)
 
 
