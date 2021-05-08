@@ -1,3 +1,20 @@
+## [1.3.1](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.3.0...v1.3.1) (2021-05-08)
+
+
+### Chore
+
+* fixes spellcheck in bugreport ([7d754b6](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/7d754b605ed7fed3ea1a9c7d0d951a09806a1c37))
+* set myself as default assignee in pr ([0dcd0ce](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/0dcd0ce95b50a1e8a2fef91307f7fd8964314f68))
+* tests/entry.js module resolving ([c840f8b](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/c840f8b479234b7944b2d2708344ae24df231464))
+* Update dependency @rollup/plugin-commonjs to v19 ([bf29948](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/bf2994851b033e64744e381f5f566ca9eed0aef5))
+* Update dependency @rollup/plugin-node-resolve to v13 ([265fd82](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/265fd82a61b0f2ee81bcb445f93e34f05bb4540b))
+* update eslint ([4aac03c](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4aac03c8db5f28d1d41838fc70e614df93e034d6))
+* update lock file ([4ffb878](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4ffb878e544a8cbe68fa7b3c5908b8ccdf9e394f))
+
+### Fix
+
+* remove stemming on whitelist generation ([4322e23](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4322e230b27c36eff8f6fea77cfe43a9457e286c))
+
 # [1.3.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.2.0...v1.3.0) (2021-05-08)
 
 
