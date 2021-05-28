@@ -20,7 +20,8 @@ const COPY = [
 ];
 
 const TEST_MODULES = [
-    'mocha'
+    'mocha',
+    'eslint'
 ];
 
 const resolveIgnoreRegexp = `^(?!${TEST_MODULES.join('|')}).*$`;

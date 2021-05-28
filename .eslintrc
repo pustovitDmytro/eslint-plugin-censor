@@ -3,6 +3,16 @@
         "incredible"
     ],
     "rules": {
-        "censor/no-swear": 0
+        "censor/no-swear": 0,
+        "unicorn/filename-case" : [
+            "error",
+            {
+                "cases" : {
+                    "camelCase"  : true,
+                    "kebabCase" : true,
+                    "pascalCase": true
+                }
+            }
+        ]
     }
 }

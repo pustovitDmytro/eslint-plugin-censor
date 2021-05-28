@@ -15,11 +15,9 @@ export function onYargsFail(rej, message, error, ygs) {
 
 export function cliCommand(method, isMain) {
     // eslint-disable-next-line func-style
-    const f =  async function (...args) {
+    return async function (...args) {
         try {
-            const result = await Promise.resolve(method.apply(this, args));
-
-            return result;
+            return await Promise.resolve(method.apply(this, args));
         } catch (error) {
             console.error(error.toString());
             console.error(error.stack);
@@ -28,6 +26,4 @@ export function cliCommand(method, isMain) {
             throw error;
         }
     };
-
-    return f;
 }

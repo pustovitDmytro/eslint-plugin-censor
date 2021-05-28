@@ -1,8 +1,16 @@
 import { assert } from 'chai';
-import entry from '../entry';
+import { rules, configs } from '../entry';
 
 suite('Configurations');
 
-test('Default configuration', function () {
-    assert.exists(entry);
+test('exported rules', function () {
+    assert.exists(rules);
+    assert.isObject(rules);
+    assert.isNotEmpty(rules);
+});
+
+test('exported configs', function () {
+    assert.exists(configs);
+    assert.isObject(configs);
+    assert.isNotEmpty(configs);
 });

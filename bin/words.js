@@ -44,6 +44,7 @@ function merge(current, income) {
         const byArrLength = a.length - b.length;
 
         if (byArrLength) return byArrLength;
+        // eslint-disable-next-line unicorn/no-array-reduce, unicorn/no-array-callback-reference
         const byWordLength = a.reduce(sumLength, 0) - b.reduce(sumLength, 0);
 
         if (byWordLength) return byWordLength;
@@ -81,7 +82,7 @@ function mergeWhite(current, income, black) {
     }
 
     const normalized = [
-        ...current.map(toArray),
+        ...current.map((element) => toArray(element)),
         ...income.map(w => {
             const array = isArray(w) ? w : w.toLowerCase().split(/\W/);
             const stemmed = array.map(item => item);
@@ -92,7 +93,7 @@ function mergeWhite(current, income, black) {
 
     const filtered = normalized
         .filter(w => w.length)
-        .filter(hasBadPart);
+        .filter((element) => hasBadPart(element));
 
     console.log(`Filtered ${normalized.length - filtered.length} not matching bad, Left: ${filtered.length} words`);
 
@@ -100,7 +101,7 @@ function mergeWhite(current, income, black) {
         .filter(w => w.length)
         .filter((word, index, all) => {
             const firstOccurence = all.findIndex(item =>
-                item.every(i => word.some(w => w === i)));
+                item.every(i => word.includes(i)));
 
             return firstOccurence === index;
         });
@@ -119,7 +120,7 @@ async function save(args) {
         words.push(...content.toString().split(/\n|\r\n/));
     }
 
-    if (!words.length) console.warn('No new words specified');
+    if (words.length === 0) console.warn('No new words specified');
     const current = await loadJSON(BLACKLIST_JSON_PATH);
     const merged = merge(current, words);
 
@@ -138,7 +139,7 @@ async function saveWhite(args) {
         words.push(...content.toString().split(/\n|\r\n/));
     }
 
-    if (!words.length) console.warn('No new words specified');
+    if (words.length === 0) console.warn('No new words specified');
     const current = await loadJSON(WHITELIST_JSON_PATH);
     const black = await loadJSON(BLACKLIST_JSON_PATH);
     const merged = mergeWhite(current, words, black);
@@ -147,6 +148,19 @@ async function saveWhite(args) {
         await fs.writeJSON(WHITELIST_JSON_PATH, merged);
         console.log(`New words written to ${WHITELIST_JSON_PATH}`);
     }
+}
+
+function wordsOpts(y) {
+    return y.option('words', {
+        describe     : 'words to add',
+        demandOption : true,
+        type         : 'array'
+    }) .option('confirm', {
+        describe     : 'save to file, if not set only analize',
+        alias        : [ 'y' ],
+        demandOption : false,
+        type         : 'boolean'
+    });
 }
 
 export default async function run(cmd) {
@@ -158,36 +172,13 @@ export default async function run(cmd) {
                 .usage('Usage: $0 black <command> [options]')
                 .command({
                     command : 'list [--confirm] <words...>',
-                    builder : y => y
-                        .option('words', {
-                            describe     : 'words to add',
-                            demandOption : true,
-                            type         : 'array'
-                        })
-                        .option('confirm', {
-                            describe     : 'save to file, if not set only analize',
-                            alias        : [ 'y' ],
-                            demandOption : false,
-                            type         : 'boolean'
-                        }),
+                    builder : wordsOpts,
                     desc    : 'Save new words to common black list from cli',
                     handler : cliCommand(save)
                 })
                 .command({
                     command : 'file <file> [--confirm]',
-                    builder : y => y
-                        .option('file', {
-                            alias        : [ 'f' ],
-                            demandOption : true,
-                            describe     : 'path to file, where words are stored',
-                            type         : 'string'
-                        })
-                        .option('confirm', {
-                            describe     : 'save to file, if not set only analize',
-                            alias        : [ 'y' ],
-                            demandOption : false,
-                            type         : 'boolean'
-                        }),
+                    builder : wordsOpts,
                     desc    : 'Save new words to common black list from file',
                     handler : cliCommand(save)
                 }),
@@ -199,18 +190,7 @@ export default async function run(cmd) {
                 .usage('Usage: $0 white <command> [options]')
                 .command({
                     command : 'list [--confirm] <words...>',
-                    builder : y => y
-                        .option('words', {
-                            describe     : 'words to add',
-                            demandOption : true,
-                            type         : 'array'
-                        })
-                        .option('confirm', {
-                            describe     : 'save to file, if not set only analize',
-                            alias        : [ 'y' ],
-                            demandOption : false,
-                            type         : 'boolean'
-                        }),
+                    builder : wordsOpts,
                     desc    : 'Save new words to common white list from cli',
                     handler : cliCommand(saveWhite)
                 })

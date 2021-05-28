@@ -1,7 +1,7 @@
 import { RuleTester } from 'eslint';
-import plugin from '../entry';
+import { rules } from '../entry';
 
-const rule = plugin.rules['no-swear'];
+const rule = rules['no-swear'];
 const ruleTester = new RuleTester({
     'parserOptions' : {
         'ecmaVersion' : 2017
