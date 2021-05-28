@@ -9,5 +9,7 @@
   "color": true,
   "full-trace": true,
   "recursive": true,
-  "require": ["./tests/test.env.js"]
+  "grep": "#no-pack",
+  "invert": true,
+  "require": ["./tests-init.js"]
 } 

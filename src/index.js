@@ -1,12 +1,13 @@
-module.exports = {
-    rules : {
-        'no-swear' : require('./rules/no-swear')
-    },
-    configs : {
-        recommended : {
-            rules : {
-                'censor/no-swear' : 2
-            }
+const rules = {
+    'no-swear' : require('./rules/no-swear')
+};
+
+const configs = {
+    recommended : {
+        rules : {
+            'censor/no-swear' : 2
         }
     }
 };
+
+export { rules, configs };
