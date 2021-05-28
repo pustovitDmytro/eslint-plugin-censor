@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-censor",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "The plugin will prevent you from using swear pejoratives and abuse words ",
   "main": "./lib",
   "scripts": {
