@@ -1,3 +1,30 @@
+## [1.5.1](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.5.0...v1.5.1) (2021-07-10)
+
+
+### Chore
+
+* adds sonarcloud config ([c92973d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/c92973d998ecee059594fbcdd35b9be0c08ffd0b))
+* Lock file maintenance ([4af079e](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/4af079e43d5da6edc39d8481abff3ec8ece1da5d))
+* Lock file maintenance ([cdf4f11](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/cdf4f112eebab895c624210cc672ab00ba2fa443))
+* Update dependency eslint-plugin-regexp to ^0.12.0 ([51ff304](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/51ff3049b892e9ee5655761e53454e4c601fba27))
+* Update dependency eslint-plugin-regexp to ^0.12.0 ([f146dc5](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/f146dc553f2bce4f3fbcb31e1ffcd17654fc0b68))
+* Update dependency eslint-plugin-regexp to ^0.13.0 ([27c7549](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/27c7549a585c3385bd5db4705774114be8e8d7a7))
+* Update dependency eslint-plugin-regexp to ^0.13.0 (#36) ([3a8d3ec](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/3a8d3ecefa7c49575b4c6de6832690117d852dd7)), closes [#36](https://github.com/pustovitDmytro/eslint-plugin-censor/issues/36)
+* Update dependency eslint-plugin-sonarjs to ^0.9.0 ([81d9681](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/81d9681ef601c70ee83a7ca26b199d647fc4ca0e))
+* Update dependency eslint-plugin-sonarjs to ^0.9.0 ([091af35](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/091af3546caf717b795629a8ee74370af148e52b))
+* Update dependency eslint-plugin-unicorn to v34 (#22) ([69f2020](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/69f20204b274e2fcb06240c7509298dc981dc2af)), closes [#22](https://github.com/pustovitDmytro/eslint-plugin-censor/issues/22)
+* Update dependency eslint-plugin-unicorn to v34 (#34) ([86efbac](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/86efbac96c6fbd1055c7e83fc3a42a861836b943)), closes [#34](https://github.com/pustovitDmytro/eslint-plugin-censor/issues/34)
+* Update dependency husky to v7 ([a5b4cbf](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a5b4cbf081abdaaa90d9bcf204f51428f53d2ef7))
+* Update dependency husky to v7 ([3578711](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/35787117161955387aad52949d506c0fbaf42edf))
+
+### Docs
+
+* update snyk badge ([a7fbb1d](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/a7fbb1d0e408bec8b8a8f37d1ffef3921d1dc106))
+
+### Fix
+
+* adds isExists to ignore ([c39c1b0](https://github.com/pustovitDmytro/eslint-plugin-censor/commit/c39c1b0d6f30b4caf7958273ccdc0b63386d5687))
+
 # [1.5.0](https://github.com/pustovitDmytro/eslint-plugin-censor/compare/v1.4.1...v1.5.0) (2021-06-14)
 
 
